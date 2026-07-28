@@ -96,6 +96,7 @@ padding:20px;
 border-radius:30px;
 text-align:center;
 font-size:22px;
+cursor:pointer;
 
 }
 
@@ -178,6 +179,20 @@ text-align:center;
 
 }
 
+/* Spinner Overlay Styles */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #008000;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 </style>
 
@@ -190,7 +205,6 @@ text-align:center;
 <div class="top">
 
 <img src="logo/logo.png" alt="Logo" width="120">KCB M-PESA Loans
-</div>
 
 <div>
 Help ?
@@ -244,15 +258,11 @@ Low 5.5% interest rates for qualified borrowers
 
 
 
-<a href="approval.html" style="text-decoration:none;">
-
-<div class="apply">
+<div class="apply" onclick="goToApproval(event)">
 
 Apply Now →
 
 </div>
-
-</a>
 
 
 
@@ -345,6 +355,26 @@ Privacy &nbsp; Terms &nbsp; Contact
 </footer>
 
 
+
+<!-- Fullscreen Overlay for Loading -->
+<div id="loading-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.95); z-index:9999; flex-direction:column; align-items:center; justify-content:center; text-align:center; font-family:sans-serif;">
+  <div class="spinner"></div>
+  <p style="margin-top:20px; font-size:1.2rem; color:#333; font-weight:bold;">Please wait...</p>
+</div>
+
+<script>
+  function goToApproval(event) {
+    if (event) event.preventDefault();
+    
+    // Show overlay spinner
+    document.getElementById('loading-overlay').style.display = 'flex';
+    
+    // Redirect after 2 seconds
+    setTimeout(function() {
+      window.location.href = 'approval.html';
+    }, 2000);
+  }
+</script>
 
 </body>
 </html>
